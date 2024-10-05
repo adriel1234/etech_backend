@@ -32,6 +32,6 @@ class Employee(ModelBase):
 
 class Sale (ModelBase):
     nrf = models.CharField(db_column='tx_nrf',null=False,max_length=255)
-    employee = models.ForeignKey(Employee,db_column='employee_id',null=False, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,db_column='product_id',null=False, on_delete=models.DO_NOTHING)
+    employee = models.ForeignKey(Employee,db_column='employee_id',null=False, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product,db_column='product_id',null=False, on_delete=models.PROTECT)
     client = models.ForeignKey(Client,db_column='client_id',null=False,on_delete=models.PROTECT)
