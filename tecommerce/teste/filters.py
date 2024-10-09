@@ -22,7 +22,7 @@ class ClientFilter(filters.FilterSet):
 
     class Meta:
         model = models.Client
-        fields = ['nome', 'cpf_sw', 'cpf_equals', 'rg', 'age']
+        fields = ['name', 'cpf_sw', 'cpf_equals', 'rg', 'age']
 
 
 class ProductFilter(filters.FilterSet):
