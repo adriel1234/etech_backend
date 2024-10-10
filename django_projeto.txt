@@ -104,11 +104,6 @@ class Client(ModelBase):
         db_table = 'client'
         managed = True
 
-class ClientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Client
-        exclude = ['created_at']
-
 
 10 - criar o filters.py  no app teste:
 
@@ -117,6 +112,7 @@ from teste import models
 
 # Filtro de pesquisa
 LIKE = 'unaccent__icontains'
+ICONTAINS = 'icontains'
 EQUALS = 'exact'
 STARTS_WITH = 'startswith'
 GT = 'gt'
@@ -127,7 +123,7 @@ IN = 'in'
 
 
 class ClientFilter(filters.FilterSet):
-    name = filters.CharFilter(lookup_expr=LIKE)
+    name = filters.CharFilter(lookup_expr=ICONTAINS) 
     cpf_sw = filters.CharFilter(field_name='cpf', lookup_expr=STARTS_WITH)
     cpf_equals = filters.CharFilter(field_name='cpf', lookup_expr=EQUALS)
     rg = filters.CharFilter(lookup_expr=STARTS_WITH)
@@ -141,6 +137,11 @@ class ClientFilter(filters.FilterSet):
 
 from rest_framework import serializers
 from teste import models
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Client
+        exclude = ['created_at']
 
 12 - criar o viewsets.py  no app teste:
 
@@ -203,5 +204,5 @@ class Migration(migrations.Migration):
         migrations.RunSQL("CREATE EXTENSION IF NOT EXISTS unaccent;"),
 
     ]
-
+18 - executar a a´plicação:  python .\manage.py runserver
 
