@@ -1,5 +1,4 @@
 from django_filters import rest_framework as filters
-
 from teste import models
 
 # Filtro de pesquisa
@@ -37,7 +36,8 @@ class ProductFilter(filters.FilterSet):
 
 class EmployeeFilter(filters.FilterSet):
     name = filters.CharFilter(lookup_expr=LIKE)
-    registration = filters.CharFilter(lookup_expr=EQUALS)
+    registration_like = filters.CharFilter(field_name='registration', lookup_expr=LIKE)
+    registration_equals = filters.CharFilter(field_name='registration', lookup_expr=EQUALS)
 
     class Meta:
         model = models.Employee
