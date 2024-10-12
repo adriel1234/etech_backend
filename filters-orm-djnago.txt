@@ -1,0 +1,25 @@
+from teste import models
+products = models.Product.objects.all()
+print(products)
+<QuerySet [<Product: Product object (1)>, <Product: Product object (2)>, <Product: Product object (3)>, <Product: Product object (4)>, <Product: Product object (5)>]>
+lista = list(products)
+
+products = models.Product.objects.filter(description='mouse') # filtrar usando  select * from product where tx_description = 'mouse';
+
+products = models.Product.objects.filter(description__unaccent='teste') # filtar unaccent
+
+prod = models.Product.objects.get(id=1) # retorna apenas um registro 
+
+clients = models.Client.objects.filter(name__unaccent__icontains='teste') # ignora os acentos maiscula e minúscula e que contem 
+
+products = models.Product.objects.filter(description__unaccent__icontains='teste').values('description','quantity') # retorna apenas as colunas decription e qunatity
+
+clients.count() retorna a quantidades de registros
+
+clients.values('id') exibe apenas a coluna id
+
+products.filter(quantity__gte=10).values('id','quantity') # filtar maior ou igual 10 e exibe as colunas id e quantity
+
+sales = models.Sale.objects.filter(product__description='mouse') # filtra descrição de um produto em uma venda
+
+sales.values('id','product__description') # exibe o id da venda e o nome do produto
