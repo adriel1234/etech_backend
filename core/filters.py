@@ -52,7 +52,8 @@ class SaleFilter(filters.FilterSet):
     cpf_client = filters.CharFilter(field_name='client__cpf', lookup_expr=STARTS_WITH)
     employee = filters.CharFilter(field_name='employee__name', lookup_expr=LIKE)
     registration_employee = filters.CharFilter(field_name='employee__registration', lookup_expr=ICONTAINS)
+    id_employee = filters.CharFilter(field_name='employee__id', lookup_expr=EQUALS)
 
     class Meta:
         model = models.Sale
-        fields = ['nrf', 'product', 'client', 'employee', 'registration_employee', 'cpf_client']
+        fields = ['nrf', 'product', 'client', 'employee', 'registration_employee', 'cpf_client', 'id_employee']
