@@ -14,7 +14,7 @@ IN = 'in'
 
 
 class ClientFilter(filters.FilterSet):
-    name = filters.CharFilter(lookup_expr=ICONTAINS)
+    name = filters.CharFilter(lookup_expr=LIKE)
     cpf_sw = filters.CharFilter(field_name='cpf', lookup_expr=STARTS_WITH)
     cpf_equals = filters.CharFilter(field_name='cpf', lookup_expr=EQUALS)
     rg = filters.CharFilter(lookup_expr=STARTS_WITH)
@@ -23,8 +23,10 @@ class ClientFilter(filters.FilterSet):
     class Meta:
         model = models.Client
         fields = ['name', 'cpf_sw', 'cpf_equals', 'rg', 'age']
+
+
 class ProductFilter(filters.FilterSet):
-    description = filters.CharFilter(lookup_expr=ICONTAINS)
+    description = filters.CharFilter(lookup_expr=LIKE)
     quantity_equals = filters.NumberFilter(field_name='quantity', lookup_expr=EQUALS)
     quantity_gt = filters.NumberFilter(field_name='quantity', lookup_expr=GT)
 
@@ -34,7 +36,7 @@ class ProductFilter(filters.FilterSet):
 
 
 class EmployeeFilter(filters.FilterSet):
-    name = filters.CharFilter(lookup_expr=ICONTAINS)
+    name = filters.CharFilter(lookup_expr=LIKE)
     registration_like = filters.CharFilter(field_name='registration', lookup_expr=ICONTAINS)
     registration_equals = filters.CharFilter(field_name='registration', lookup_expr=EQUALS)
 
@@ -48,7 +50,7 @@ class SaleFilter(filters.FilterSet):
     product = filters.CharFilter(field_name='product__description', lookup_expr=ICONTAINS)
     client = filters.CharFilter(field_name='client__name', lookup_expr=ICONTAINS)
     cpf_client = filters.CharFilter(field_name='client__cpf', lookup_expr=STARTS_WITH)
-    employee = filters.CharFilter(field_name='employee__description', lookup_expr=ICONTAINS)
+    employee = filters.CharFilter(field_name='employee__name', lookup_expr=LIKE)
     registration_employee = filters.CharFilter(field_name='employee__registration', lookup_expr=ICONTAINS)
 
     class Meta:
